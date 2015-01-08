@@ -11,7 +11,7 @@ if node['loggly']['token']['from_databag']
   databag = node['loggly']['token']['databag']
   databag_item = node['loggly']['token']['databag_item']
 
-  loggly_token = Chef::EncryptedDataBagItem.load(databag, databag_item)['token']
+  loggly_token = data_bag_item('configs', 'loggly')
   raise "No token was found in databag item: #{databag}/#{databag_item}" if loggly_token.nil?
 else
   raise "When not using a Data Bag, you have to define the Loggly token manually" if node['loggly']['token']['value'].empty?
